@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
+    <display-name>Resume</display-name>
+    <welcome-file-list>
+        <welcome-file>web_index/remove.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet-mapping>
+        <servlet-name>servlet_nickname</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>servlet_nickname</servlet-name>
+        <servlet-class>project.Servlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servlet_admin</servlet-name>
+        <url-pattern>*.action</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>servlet_admin</servlet-name>
+        <servlet-class>project.adminServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>servlet_zj</servlet-name>
+        <url-pattern>*.a</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>servlet_zj</servlet-name>
+        <servlet-class>project.ResumeServlet</servlet-class>
+    </servlet>
+    <!--提交评价servlet -->
+    <servlet-mapping>
+        <servlet-name>servlet_evaluate</servlet-name>
+        <url-pattern>/evaluate</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>servlet_evaluate</servlet-name>
+        <servlet-class>project.EvaluateServlet</servlet-class>
+    </servlet>
+</web-app>
