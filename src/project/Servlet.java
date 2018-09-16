@@ -41,7 +41,7 @@ public class Servlet extends HttpServlet {
     public void method_admin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("这是admin方法");
         response.setContentType("text/html;charset=utf-8");
-        request.getRequestDispatcher("/web_index/admin.jsp").forward(request, response);
+       // request.getRequestDispatcher("").forward(request, response);
     }
     public void method_a(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("这是a方法");
