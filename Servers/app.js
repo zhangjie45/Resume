@@ -1,5 +1,5 @@
 let express = require('express');
-let user = require('./db.js');
+let db = require('./db.js');
 let http = require('http');
 const bodyParser = require('body-parser');
 var app = express();
@@ -14,14 +14,6 @@ const L10N = {
 
 }
 
-let appInit = function (app) {
-    app.use(bodyParser.urlencoded({
-        extended: false
-    }));
-    app.use(bodyParser.json());
-}
-// let appRest = function (app) {
-//如果用户直接进入127.0.0.1:3000 则将url地址重定向为remove.html
 app.get('/', function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.resirect("../web/web_index/resume.html")
@@ -29,40 +21,39 @@ app.get('/', function (req, res, next) {
 app.get('/resume', function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     return new Promise((reslove, reject) => {
-        user.findUser('张三').then(user => {
-            console.log(user);
+        db.findUser('张三').then(user => {
             if (!user) {
                 res.status(200).send({
                     "code": 200,
                     "message": L10N.ERROR_USER_PASSWD
                 });
             } else {
-                res.status(200).send(user.username);
+                res.status(200).send(user);
             }
         })
     })
 
 });
+app.post('/addUser', function (req, res, next) {
+    let name = req.body.username || null;
+    let password = req.body.password || null;
+    if (!name || !password) {
+        res.send({
+            "code": 200,
+            "message": L10N.ERROR_PARAMETER
+        });
+        return next();
+    }
+    db.addUser(name, password);
+    res.send({
+        "code": 200,
+        "message": "Success"
+    })
+
+})
 
 var server = app.listen(8080, function () {
     var host = server.address().address;
     var port = server.address().port;
-
-    console.log("应用实例，访问地址为 http://%s:%s", host, port)
-
+    console.log(host, port)
 })
-// }
-let httpServerInit = function (app) {
-    var httpsServer = http.createServer(app);
-
-    httpsServer.listen((_config.EXPORT || 8081), function () {
-        logger.info("example app is listening at " + (_config.EXPORT || 8081) + " port");
-    });
-}
-module.exports.start = function () {
-    const app = express();
-    appInit(app);
-    appRest(app);
-    httpServerInit(app);
-
-}

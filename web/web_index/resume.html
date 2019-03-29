@@ -4,8 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <title>Title</title>
+    <title>Resume</title>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/swiper.min.js"></script>
@@ -23,21 +22,26 @@
     <div class="swiper-container">
 
         <div class="swiper-wrapper">
+            <!-- 首页 -->
             <div class="swiper-slide">
                 <div class="home_page">
                     <!--用于适配不同大小屏幕（栅格化布局） -->
                     <div class="container">
                         <div class="row">
-                            <div class="col-sm-8 col-lg-offset-2 text-center ">
+                            <div class="text-center ">
                                 <div class="home_introduce">
                                     <img src="images/user-3.jpg" style="height: 220px;width: 220px" class="img-circle ">
                                     <h1 style="color: #ffffff;margin-top: 30px"><span id="user_name"></span></h1>
                                     <h3 style="color: #ffffff;margin-bottom: 25px">
-                                        <span>性别:1</span>&nbsp;&nbsp;&nbsp;<span>年龄:18</span>
+                                        <span>性别:<span id="user_sex"></span></span>&nbsp;&nbsp;&nbsp;<span>年龄:<span id="user_age"></span></span>
                                     </h3>
                                     <p>
                                         <ul class="social_contact">
-                                            <li><a href="#"><i class="icon-qq"></i></a></li>
+                                            <li><a href="#"><i class="icon-qq">
+                                                <!-- <div class="work">
+                                                    <img src="./images/blog-2.jpg"/>
+                                                </div> -->
+                                            </i></a></li>
                                             <li><a href="#"><i class="icon-sina-weibo2"></i></a></li>
                                             <li><a href="#"><i class="icon-bubbles"></i></a></li>
                                             <li><a href="#"><i class="icon-github2"></i></a></li>
@@ -49,6 +53,7 @@
                     </div>
                 </div>
             </div>
+            <!-- 个人信息 -->
             <div class="swiper-slide">
                 <div id="introduce_oneself" class="animate-box">
                     <div class="container">
@@ -97,6 +102,7 @@
 
 
             </div>
+            <!-- 教育经历 -->
             <div class="swiper-slide">
                 <div class="container">
                     <div class="page-header">
@@ -142,6 +148,7 @@
                     </ul>
                 </div>
             </div>
+            <!-- 技能 -->
             <div class="swiper-slide">
                 <div id="resume-skills" class="animate-box">
                     <div class="container">
@@ -213,6 +220,7 @@
                     </div>
                 </div>
             </div>
+            <!-- 爱好 -->
             <div class="swiper-slide">
                 <div id="remove-hobby" class="remove-hobby-bg">
                     <div class="container">
@@ -260,6 +268,7 @@
                 </div>
 
             </div>
+            <!-- 评价 -->
             <div class="swiper-slide">
                 <div id="consult">
                     <div class="show-msg animate-box">
@@ -307,41 +316,6 @@
 
 </body>
 
-<script>
-    window.onload = function () {
-        showName();
-    }
-    $(function () {
-        var mySwiper = new Swiper('.swiper-container', {
-            mousewheel: true,
-            keyboardControl: false, //不能使用键盘进行控制
-            direction: 'vertical',
-            loop: false,
-            longSwipesRatio: 0.5,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-
-        });
-
-    })
-
-    function showName() {
-        $.ajax({
-
-            url: 'http://127.0.0.1:8080/resume',
-            type: 'get',
-            success: function (data, request) {
-                $("#user_name").text(data);
-
-            },
-            error: function (err) {
-                alert(err.message || "服务器错误");
-            }
-        })
-
-    }
-</script>
+<script src="./js/resume.js"></script>
 
 </html>
